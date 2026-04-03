@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Bike, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -8,13 +9,14 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <Link to="/" className="mb-4 flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Bike className="h-5 w-5 text-primary-foreground" />
+              <img src={logo} alt="Punekar Bike Point" className="h-10 w-10 rounded-lg object-contain" />
+              <div className="flex flex-col leading-tight">
+                <span className="font-display text-lg font-bold">Punekar Bike Point</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-secondary-foreground/50">Sale & Purchase</span>
               </div>
-              <span className="font-display text-xl font-bold">2WheelR</span>
             </Link>
             <p className="text-sm text-secondary-foreground/70">
-              India's trusted platform for buying and selling pre-owned bikes. Get the best deals on quality two-wheelers.
+              Pune's trusted destination for buying and selling pre-owned bikes. Get the best deals on quality two-wheelers.
             </p>
           </div>
 
@@ -43,8 +45,8 @@ const Footer = () => {
               <a href="tel:+919999999999" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Phone className="h-4 w-4" /> +91 99999 99999
               </a>
-              <a href="mailto:info@2wheelr.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Mail className="h-4 w-4" /> info@2wheelr.com
+              <a href="mailto:info@punekarbikes.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Mail className="h-4 w-4" /> info@punekarbikes.com
               </a>
               <span className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" /> Pune, Maharashtra
@@ -54,7 +56,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-secondary-foreground/10 pt-6 text-center text-sm text-secondary-foreground/50">
-          © {new Date().getFullYear()} 2WheelR. All rights reserved.
+          © {new Date().getFullYear()} Punekar Bike Point. All rights reserved.
         </div>
       </div>
     </footer>

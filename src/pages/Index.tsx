@@ -19,10 +19,11 @@ const Index = () => {
         <div className="container relative z-10">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold leading-tight text-secondary-foreground md:text-6xl">
-              Buy & Sell <span className="text-gradient">Pre-Owned Bikes</span>
+              <span className="text-gradient">Punekar Bike Point</span>
             </h1>
+            <p className="mb-2 text-xl font-semibold text-accent md:text-2xl">Sale & Purchase</p>
             <p className="mb-8 text-lg text-secondary-foreground/70 md:text-xl">
-              India's most trusted platform for quality second-hand two-wheelers. Find your perfect ride or sell your bike at the best price.
+              Pune's most trusted destination for quality second-hand two-wheelers. Find your perfect ride or sell your bike at the best price.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link to="/buy">

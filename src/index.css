@@ -17,7 +17,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 10%;
 
-    --primary: 174 62% 32%;
+    --primary: 24 90% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 30% 12%;
@@ -34,7 +34,7 @@
 
     --border: 220 13% 90%;
     --input: 220 13% 90%;
-    --ring: 174 62% 32%;
+    --ring: 24 90% 50%;
 
     --radius: 0.75rem;
 
@@ -50,7 +50,7 @@
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
-    --hero-gradient: linear-gradient(135deg, hsl(220 30% 12%) 0%, hsl(220 25% 18%) 50%, hsl(174 62% 32%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(220 30% 12%) 0%, hsl(220 25% 18%) 50%, hsl(24 90% 50%) 100%);
     --card-shadow: 0 2px 16px -4px hsl(220 20% 10% / 0.08);
     --card-shadow-hover: 0 8px 30px -8px hsl(220 20% 10% / 0.15);
   }
@@ -62,7 +62,7 @@
     --card-foreground: 0 0% 95%;
     --popover: 220 20% 10%;
     --popover-foreground: 0 0% 95%;
-    --primary: 174 62% 42%;
+    --primary: 24 90% 55%;
     --primary-foreground: 0 0% 100%;
     --secondary: 220 20% 16%;
     --secondary-foreground: 0 0% 95%;
@@ -74,15 +74,15 @@
     --destructive-foreground: 0 0% 95%;
     --border: 220 15% 20%;
     --input: 220 15% 20%;
-    --ring: 174 62% 42%;
+    --ring: 24 90% 55%;
     --sidebar-background: 220 20% 8%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 174 62% 42%;
+    --sidebar-primary: 24 90% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 15% 14%;
     --sidebar-accent-foreground: 0 0% 90%;
     --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 174 62% 42%;
+    --sidebar-ring: 24 90% 55%;
   }
 }
 
@@ -104,7 +104,7 @@
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(174 62% 32%), hsl(28 95% 54%));
+    background-image: linear-gradient(135deg, hsl(24 90% 50%), hsl(35 100% 60%));
   }
 
   .hero-bg {
