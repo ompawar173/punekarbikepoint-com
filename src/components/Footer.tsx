@@ -16,7 +16,8 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-sm text-secondary-foreground/70">
-              India's trusted platform for buying and selling pre-owned bikes. Get the best deals on quality two-wheelers.
+              Pune's trusted destination for buying and selling pre-owned bikes. Get the best deals on quality two-wheelers.
+            </p>
             </p>
           </div>
 
