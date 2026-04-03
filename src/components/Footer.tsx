@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-secondary-foreground/10 pt-6 text-center text-sm text-secondary-foreground/50">
-          © {new Date().getFullYear()} 2WheelR. All rights reserved.
+          © {new Date().getFullYear()} Punekar Bike Point. All rights reserved.
         </div>
       </div>
     </footer>

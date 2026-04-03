@@ -21,12 +21,11 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Bike className="h-5 w-5 text-primary-foreground" />
+          <img src={logo} alt="Punekar Bike Point" className="h-10 w-10 rounded-lg object-contain" />
+          <div className="flex flex-col leading-tight">
+            <span className="font-display text-lg font-bold text-foreground">Punekar Bike Point</span>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Sale & Purchase</span>
           </div>
-          <span className="font-display text-xl font-bold text-foreground">
-            2WheelR
-          </span>
         </Link>
 
         {/* Desktop nav */}
