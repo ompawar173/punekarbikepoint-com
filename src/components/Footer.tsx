@@ -9,10 +9,11 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <Link to="/" className="mb-4 flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Bike className="h-5 w-5 text-primary-foreground" />
+              <img src={logo} alt="Punekar Bike Point" className="h-10 w-10 rounded-lg object-contain" />
+              <div className="flex flex-col leading-tight">
+                <span className="font-display text-lg font-bold">Punekar Bike Point</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-secondary-foreground/50">Sale & Purchase</span>
               </div>
-              <span className="font-display text-xl font-bold">2WheelR</span>
             </Link>
             <p className="text-sm text-secondary-foreground/70">
               India's trusted platform for buying and selling pre-owned bikes. Get the best deals on quality two-wheelers.
