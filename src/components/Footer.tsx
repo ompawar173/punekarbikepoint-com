@@ -18,7 +18,6 @@ const Footer = () => {
             <p className="text-sm text-secondary-foreground/70">
               Pune's trusted destination for buying and selling pre-owned bikes. Get the best deals on quality two-wheelers.
             </p>
-            </p>
           </div>
 
           <div>
