@@ -46,8 +46,8 @@ const Footer = () => {
               <a href="tel:+919999999999" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Phone className="h-4 w-4" /> +91 99999 99999
               </a>
-              <a href="mailto:info@2wheelr.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Mail className="h-4 w-4" /> info@2wheelr.com
+              <a href="mailto:info@punekarbikes.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Mail className="h-4 w-4" /> info@punekarbikes.com
               </a>
               <span className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" /> Pune, Maharashtra
