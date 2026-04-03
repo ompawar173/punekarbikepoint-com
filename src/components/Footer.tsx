@@ -42,14 +42,14 @@ const Footer = () => {
           <div>
             <h4 className="mb-4 font-display font-semibold">Contact</h4>
             <div className="flex flex-col gap-3 text-sm text-secondary-foreground/70">
-              <a href="tel:+919999999999" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Phone className="h-4 w-4" /> +91 99999 99999
+              <a href="tel:+919372058229" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Phone className="h-4 w-4" /> +91 93720 58229
               </a>
               <a href="mailto:info@punekarbikes.com" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" /> info@punekarbikes.com
               </a>
-              <span className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" /> Pune, Maharashtra
+              <span className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Opposite Marathi School, Near Bhaji Mandai, Dhanvantari Colony, Wadgaon Sheri, Pune, Maharashtra 411014
               </span>
             </div>
           </div>
