@@ -14,16 +14,176 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bikes: {
+        Row: {
+          brand: string
+          condition: string
+          created_at: string
+          description: string | null
+          features: string[] | null
+          fuel_type: string
+          id: string
+          images: string[] | null
+          is_featured: boolean
+          km_driven: number
+          location: string
+          model: string
+          owner: string
+          price: number
+          seller_note: string | null
+          title: string
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          brand: string
+          condition?: string
+          created_at?: string
+          description?: string | null
+          features?: string[] | null
+          fuel_type?: string
+          id?: string
+          images?: string[] | null
+          is_featured?: boolean
+          km_driven?: number
+          location?: string
+          model: string
+          owner?: string
+          price: number
+          seller_note?: string | null
+          title: string
+          updated_at?: string
+          year: number
+        }
+        Update: {
+          brand?: string
+          condition?: string
+          created_at?: string
+          description?: string | null
+          features?: string[] | null
+          fuel_type?: string
+          id?: string
+          images?: string[] | null
+          is_featured?: boolean
+          km_driven?: number
+          location?: string
+          model?: string
+          owner?: string
+          price?: number
+          seller_note?: string | null
+          title?: string
+          updated_at?: string
+          year?: number
+        }
+        Relationships: []
+      }
+      inquiries: {
+        Row: {
+          bike_id: string | null
+          bike_title: string | null
+          created_at: string
+          email: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string
+        }
+        Insert: {
+          bike_id?: string | null
+          bike_title?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+        }
+        Update: {
+          bike_id?: string | null
+          bike_title?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inquiries_bike_id_fkey"
+            columns: ["bike_id"]
+            isOneToOne: false
+            referencedRelation: "bikes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      upcoming_bikes: {
+        Row: {
+          created_at: string
+          description: string | null
+          expected_price: number | null
+          id: string
+          image: string | null
+          launch_date: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          expected_price?: number | null
+          id?: string
+          image?: string | null
+          launch_date?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          expected_price?: number | null
+          id?: string
+          image?: string | null
+          launch_date?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "manager"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +310,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "manager"],
+    },
   },
 } as const
