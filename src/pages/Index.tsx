@@ -4,10 +4,16 @@ import { Search, ShieldCheck, Handshake } from "lucide-react";
 import BikeCard from "@/components/BikeCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BIKE_LISTINGS } from "@/data/bikes";
+import { useFeaturedBikes, useBikes } from "@/hooks/useBikes";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
-  const featuredBikes = BIKE_LISTINGS.slice(0, 4);
+  const { data: featured, isLoading: featLoading } = useFeaturedBikes();
+  const { data: allBikes, isLoading: allLoading } = useBikes();
+
+  // Show featured if available, otherwise show first 4 bikes
+  const displayBikes = featured && featured.length > 0 ? featured : (allBikes?.slice(0, 4) ?? []);
+  const isLoading = featLoading && allLoading;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -23,7 +29,7 @@ const Index = () => {
             </h1>
             <p className="mb-2 text-xl font-semibold text-accent md:text-2xl">Sale & Purchase</p>
             <p className="mb-8 text-lg text-secondary-foreground/70 md:text-xl">
-              Pune's most trusted destination for quality second-hand two-wheelers. Find your perfect ride or sell your bike at the best price.
+              Pune's most trusted destination for quality second-hand two-wheelers.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link to="/buy">
@@ -76,13 +82,23 @@ const Index = () => {
               View All →
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredBikes.map((bike, i) => (
-              <div key={bike.id} className="animate-fade-in" style={{ animationDelay: `${i * 100}ms` }}>
-                <BikeCard bike={bike} />
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[1,2,3,4].map(i => (
+                <Skeleton key={i} className="aspect-[4/3] rounded-lg" />
+              ))}
+            </div>
+          ) : displayBikes.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {displayBikes.map((bike, i) => (
+                <div key={bike.id} className="animate-fade-in" style={{ animationDelay: `${i * 100}ms` }}>
+                  <BikeCard bike={bike} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground py-12">No bikes listed yet. Check back soon!</p>
+          )}
           <div className="mt-8 text-center md:hidden">
             <Link to="/buy">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
@@ -114,7 +130,7 @@ const Index = () => {
 
       {/* WhatsApp FAB */}
       <a
-        href="https://wa.me/919999999999?text=Hi%2C%20I%27m%20interested%20in%20buying%20a%20bike"
+        href="https://wa.me/919372058229?text=Hi%2C%20I%27m%20interested%20in%20buying%20a%20bike"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-success shadow-lg transition-transform hover:scale-110"
