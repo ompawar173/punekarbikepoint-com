@@ -5,17 +5,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name || !form.phone || !form.message) {
       toast.error("Please fill in all required fields");
+      return;
+    }
+    setSubmitting(true);
+    const { error } = await supabase.from("inquiries").insert({
+      name: form.name,
+      phone: form.phone,
+      email: form.email || null,
+      message: `CONTACT: ${form.message}`,
+      bike_title: "General Inquiry",
+    });
+    setSubmitting(false);
+    if (error) {
+      toast.error("Failed to send message");
       return;
     }
     setSubmitted(true);
@@ -41,14 +56,11 @@ const ContactPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-
       <div className="container py-8">
         <div className="mx-auto max-w-4xl">
           <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Contact Us</h1>
           <p className="mb-8 text-muted-foreground">Got questions? We'd love to hear from you.</p>
-
           <div className="grid gap-8 lg:grid-cols-5">
-            {/* Contact info */}
             <div className="lg:col-span-2 space-y-6">
               {[
                 { icon: Phone, label: "Phone", value: "+91 93720 58229", href: "tel:+919372058229" },
@@ -70,35 +82,20 @@ const ContactPage = () => {
                 </div>
               ))}
             </div>
-
-            {/* Form */}
             <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-4 rounded-xl border border-border bg-card p-6">
               <div className="grid gap-4 md:grid-cols-2">
-                <div>
-                  <Label htmlFor="name">Name *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email *</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required />
-                </div>
+                <div><Label htmlFor="name">Name *</Label><Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required /></div>
+                <div><Label htmlFor="phone">Phone *</Label><Input id="phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required /></div>
               </div>
-              <div>
-                <Label htmlFor="phone">Phone</Label>
-                <Input id="phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-              </div>
-              <div>
-                <Label htmlFor="message">Message *</Label>
-                <Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required />
-              </div>
-              <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-12">
-                Send Message
+              <div><Label htmlFor="email">Email</Label><Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></div>
+              <div><Label htmlFor="message">Message *</Label><Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required /></div>
+              <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-12" disabled={submitting}>
+                {submitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

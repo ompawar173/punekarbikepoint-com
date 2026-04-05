@@ -12,6 +12,7 @@ const Navbar = () => {
     { to: "/", label: "Home" },
     { to: "/buy", label: "Buy Bike" },
     { to: "/sell", label: "Sell Bike" },
+    { to: "/gallery", label: "Gallery" },
     { to: "/contact", label: "Contact" },
   ];
 
@@ -28,7 +29,6 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden items-center gap-1 md:flex">
           {links.map((link) => (
             <Link
@@ -47,7 +47,7 @@ const Navbar = () => {
 
         <div className="hidden items-center gap-3 md:flex">
           <a
-            href="https://wa.me/919999999999"
+            href="https://wa.me/919372058229"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-success transition-colors hover:bg-success/10"
@@ -62,16 +62,11 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden p-2 text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="border-t border-border bg-card p-4 md:hidden animate-fade-in">
           <div className="flex flex-col gap-2">
@@ -81,9 +76,7 @@ const Navbar = () => {
                 to={link.to}
                 onClick={() => setMobileOpen(false)}
                 className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-                  isActive(link.to)
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted"
+                  isActive(link.to) ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted"
                 }`}
               >
                 {link.label}
