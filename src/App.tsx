@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import BuyPage from "./pages/BuyPage";
 import BikeDetailPage from "./pages/BikeDetailPage";
@@ -45,6 +46,7 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </AuthProvider>
+      <SpeedInsights />
     </TooltipProvider>
   </QueryClientProvider>
 );
