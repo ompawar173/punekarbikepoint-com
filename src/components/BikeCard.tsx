@@ -1,20 +1,22 @@
 import { Link } from "react-router-dom";
-import { MapPin, Gauge, Calendar, User } from "lucide-react";
+import { MapPin, Gauge, Calendar, User, Tag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Bike } from "@/hooks/useBikes";
 
 interface BikeCardProps {
   bike: Bike;
+  promoted?: boolean;
+  couponCode?: string;
 }
 
-const BikeCard = ({ bike }: BikeCardProps) => {
+const BikeCard = ({ bike, promoted, couponCode }: BikeCardProps) => {
   const image = bike.images && bike.images.length > 0
     ? bike.images[0]
     : "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&h=400&fit=crop";
 
   return (
     <Link to={`/bike/${bike.id}`} className="group block">
-      <div className="overflow-hidden rounded-lg border border-border bg-card hover:shadow-md transition-shadow">
+      <div className={`overflow-hidden rounded-lg border bg-card hover:shadow-md transition-shadow ${promoted ? "border-accent ring-2 ring-accent/40" : "border-border"}`}>
         <div className="relative aspect-[4/3] overflow-hidden">
           <img
             src={image}
@@ -22,9 +24,11 @@ const BikeCard = ({ bike }: BikeCardProps) => {
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-          <Badge className="absolute left-3 top-3 bg-accent text-accent-foreground border-0 font-semibold text-xs">
-            {bike.condition}
-          </Badge>
+          {promoted && (
+            <Badge className="absolute left-3 top-3 bg-accent text-accent-foreground border-0 font-semibold text-xs flex items-center gap-1">
+              <Tag className="h-3 w-3" /> {couponCode ? `DEAL ${couponCode}` : "PROMOTED"}
+            </Badge>
+          )}
         </div>
         <div className="p-4">
           <h3 className="font-display text-base font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
