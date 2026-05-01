@@ -30,6 +30,7 @@ export type Database = {
           model: string
           owner: string
           price: number
+          rc_book_url: string | null
           seller_note: string | null
           title: string
           updated_at: string
@@ -50,6 +51,7 @@ export type Database = {
           model: string
           owner?: string
           price: number
+          rc_book_url?: string | null
           seller_note?: string | null
           title: string
           updated_at?: string
@@ -70,12 +72,57 @@ export type Database = {
           model?: string
           owner?: string
           price?: number
+          rc_book_url?: string | null
           seller_note?: string | null
           title?: string
           updated_at?: string
           year?: number
         }
         Relationships: []
+      }
+      coupons: {
+        Row: {
+          bike_id: string | null
+          code: string
+          created_at: string
+          discount_type: Database["public"]["Enums"]["discount_type"]
+          discount_value: number
+          expiry_date: string | null
+          id: string
+          is_active: boolean
+          updated_at: string
+        }
+        Insert: {
+          bike_id?: string | null
+          code: string
+          created_at?: string
+          discount_type?: Database["public"]["Enums"]["discount_type"]
+          discount_value: number
+          expiry_date?: string | null
+          id?: string
+          is_active?: boolean
+          updated_at?: string
+        }
+        Update: {
+          bike_id?: string | null
+          code?: string
+          created_at?: string
+          discount_type?: Database["public"]["Enums"]["discount_type"]
+          discount_value?: number
+          expiry_date?: string | null
+          id?: string
+          is_active?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coupons_bike_id_fkey"
+            columns: ["bike_id"]
+            isOneToOne: false
+            referencedRelation: "bikes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       inquiries: {
         Row: {
@@ -87,6 +134,7 @@ export type Database = {
           message: string | null
           name: string
           phone: string
+          status: Database["public"]["Enums"]["inquiry_status"]
         }
         Insert: {
           bike_id?: string | null
@@ -97,6 +145,7 @@ export type Database = {
           message?: string | null
           name: string
           phone: string
+          status?: Database["public"]["Enums"]["inquiry_status"]
         }
         Update: {
           bike_id?: string | null
@@ -107,6 +156,7 @@ export type Database = {
           message?: string | null
           name?: string
           phone?: string
+          status?: Database["public"]["Enums"]["inquiry_status"]
         }
         Relationships: [
           {
@@ -184,6 +234,8 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "manager"
+      discount_type: "percentage" | "fixed"
+      inquiry_status: "Pending" | "Open" | "Converted"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -312,6 +364,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "manager"],
+      discount_type: ["percentage", "fixed"],
+      inquiry_status: ["Pending", "Open", "Converted"],
     },
   },
 } as const
