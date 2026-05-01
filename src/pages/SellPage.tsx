@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { BRANDS } from "@/hooks/useBikes";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, X, Upload } from "lucide-react";
 
 const SellPage = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -18,6 +18,29 @@ const SellPage = () => {
     name: "", phone: "", email: "", brand: "", model: "",
     year: "", kmDriven: "", price: "", description: "",
   });
+  const [bikeImages, setBikeImages] = useState<File[]>([]);
+  const [rcBook, setRcBook] = useState<File | null>(null);
+
+  const bikePreviews = useMemo(() => bikeImages.map(f => URL.createObjectURL(f)), [bikeImages]);
+  const rcPreview = useMemo(() => (rcBook ? URL.createObjectURL(rcBook) : null), [rcBook]);
+
+  const handleBikeImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setBikeImages(prev => [...prev, ...files].slice(0, 10));
+  };
+
+  const removeBikeImage = (idx: number) => {
+    setBikeImages(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  const uploadFile = async (file: File, bucket: string) => {
+    const ext = file.name.split(".").pop();
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { error } = await supabase.storage.from(bucket).upload(path, file);
+    if (error) throw error;
+    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
+    return data.publicUrl;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,21 +48,36 @@ const SellPage = () => {
       toast.error("Please fill in all required fields");
       return;
     }
-    setSubmitting(true);
-    const { error } = await supabase.from("inquiries").insert({
-      name: form.name,
-      phone: form.phone,
-      email: form.email || null,
-      message: `SELL REQUEST - Brand: ${form.brand}, Model: ${form.model}, Year: ${form.year}, KM: ${form.kmDriven}, Price: ₹${form.price}. ${form.description}`,
-      bike_title: `${form.brand} ${form.model}`,
-    });
-    setSubmitting(false);
-    if (error) {
-      toast.error("Failed to submit. Please try again.");
+    if (bikeImages.length < 3) {
+      toast.error("Please upload at least 3 bike images");
       return;
     }
-    setSubmitted(true);
-    toast.success("Your bike listing has been submitted!");
+    if (!rcBook) {
+      toast.error("RC Book photo is required");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const imageUrls: string[] = [];
+      for (const f of bikeImages) imageUrls.push(await uploadFile(f, "bike-images"));
+      const rcUrl = await uploadFile(rcBook, "rc-documents");
+
+      const { error } = await supabase.from("inquiries").insert({
+        name: form.name,
+        phone: form.phone,
+        email: form.email || null,
+        message: `SELL REQUEST - Brand: ${form.brand}, Model: ${form.model}, Year: ${form.year}, KM: ${form.kmDriven}, Price: ₹${form.price}. ${form.description}\n\nImages:\n${imageUrls.join("\n")}\n\nRC Book: ${rcUrl}`,
+        bike_title: `${form.brand} ${form.model}`,
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      toast.success("Your bike listing has been submitted!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to submit. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -54,7 +92,7 @@ const SellPage = () => {
           <p className="mb-6 max-w-md text-muted-foreground">
             Your bike details have been submitted. Our team will contact you within 24 hours.
           </p>
-          <Button onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", brand: "", model: "", year: "", kmDriven: "", price: "", description: "" }); }}>
+          <Button onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", brand: "", model: "", year: "", kmDriven: "", price: "", description: "" }); setBikeImages([]); setRcBook(null); }}>
             Submit Another
           </Button>
         </div>
@@ -92,10 +130,56 @@ const SellPage = () => {
                 <div><Label htmlFor="km">KM Driven</Label><Input id="km" type="number" value={form.kmDriven} onChange={(e) => setForm({ ...form, kmDriven: e.target.value })} /></div>
                 <div><Label htmlFor="price">Expected Price (₹)</Label><Input id="price" type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} /></div>
               </div>
-              <div className="mt-4"><Label htmlFor="desc">Description</Label><Textarea id="desc" rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Any additional details..." /></div>
+              <div className="mt-4"><Label htmlFor="desc">Description</Label><Textarea id="desc" rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Any additional details..." /></div>
             </div>
+
+            {/* Bike Images */}
+            <div className="border-t border-border pt-6">
+              <Label>Bike Photos * <span className="text-xs text-muted-foreground">(minimum 3, max 10)</span></Label>
+              <div className="mt-2">
+                <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border bg-muted/30 py-6 text-sm text-muted-foreground hover:bg-muted/50">
+                  <Upload className="h-4 w-4" /> Click to add photos
+                  <input type="file" accept="image/*" multiple className="hidden" onChange={handleBikeImages} />
+                </label>
+              </div>
+              {bikePreviews.length > 0 && (
+                <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
+                  {bikePreviews.map((src, i) => (
+                    <div key={i} className="relative group">
+                      <img src={src} alt={`Preview ${i + 1}`} className="aspect-square w-full rounded-md border border-border object-cover" />
+                      <button type="button" onClick={() => removeBikeImage(i)} className="absolute -right-1 -top-1 rounded-full bg-destructive p-1 text-destructive-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <p className={`mt-2 text-xs ${bikeImages.length >= 3 ? "text-success" : "text-muted-foreground"}`}>
+                {bikeImages.length} / 3 minimum {bikeImages.length >= 3 && "✓"}
+              </p>
+            </div>
+
+            {/* RC Book */}
+            <div className="border-t border-border pt-6">
+              <Label>RC Book Photo * <span className="text-xs text-muted-foreground">(required)</span></Label>
+              <div className="mt-2">
+                <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed border-border bg-muted/30 py-6 text-sm text-muted-foreground hover:bg-muted/50">
+                  <Upload className="h-4 w-4" /> {rcBook ? "Replace RC Book photo" : "Upload RC Book photo"}
+                  <input type="file" accept="image/*" className="hidden" onChange={(e) => setRcBook(e.target.files?.[0] || null)} />
+                </label>
+              </div>
+              {rcPreview && (
+                <div className="mt-3 relative inline-block">
+                  <img src={rcPreview} alt="RC Book preview" className="max-h-40 rounded-md border border-border" />
+                  <button type="button" onClick={() => setRcBook(null)} className="absolute -right-1 -top-1 rounded-full bg-destructive p-1 text-destructive-foreground">
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              )}
+            </div>
+
             <Button type="submit" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold h-12" disabled={submitting}>
-              {submitting ? "Submitting..." : "Submit Listing"}
+              {submitting ? "Uploading & Submitting..." : "Submit Listing"}
             </Button>
           </form>
         </div>

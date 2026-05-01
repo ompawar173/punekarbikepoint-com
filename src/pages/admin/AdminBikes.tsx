@@ -158,18 +158,6 @@ const AdminBikes = () => {
               <div><Label>Fuel Type</Label><Input value={form.fuel_type} onChange={e => setForm({...form, fuel_type: e.target.value})} /></div>
               <div><Label>Location</Label><Input value={form.location} onChange={e => setForm({...form, location: e.target.value})} /></div>
               <div><Label>Owner</Label><Input value={form.owner} onChange={e => setForm({...form, owner: e.target.value})} /></div>
-              <div>
-                <Label>Condition</Label>
-                <Select value={form.condition} onValueChange={v => setForm({...form, condition: v})}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Like New">Like New</SelectItem>
-                    <SelectItem value="Excellent">Excellent</SelectItem>
-                    <SelectItem value="Good">Good</SelectItem>
-                    <SelectItem value="Fair">Fair</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
             <div><Label>Description</Label><Textarea value={form.description} onChange={e => setForm({...form, description: e.target.value})} rows={3} /></div>
             <div><Label>Features (comma-separated)</Label><Input value={form.features} onChange={e => setForm({...form, features: e.target.value})} placeholder="ABS, Disc Brakes, LED Lights" /></div>

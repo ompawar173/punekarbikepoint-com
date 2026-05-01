@@ -128,7 +128,6 @@ const BikeDetailPage = () => {
 
           {/* Details */}
           <div className="lg:col-span-2">
-            <Badge className="mb-3 bg-accent text-accent-foreground border-0">{bike.condition}</Badge>
             <h1 className="mb-2 font-display text-3xl font-bold text-foreground">{bike.title}</h1>
             <p className="mb-6 font-display text-4xl font-bold text-primary">
               ₹{bike.price.toLocaleString("en-IN")}

@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, ShieldCheck, Handshake } from "lucide-react";
+import { Search, ShieldCheck, Handshake, Tag } from "lucide-react";
 import BikeCard from "@/components/BikeCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useFeaturedBikes, useBikes } from "@/hooks/useBikes";
+import { useActiveCoupons } from "@/hooks/useCoupons";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const { data: featured, isLoading: featLoading } = useFeaturedBikes();
   const { data: allBikes, isLoading: allLoading } = useBikes();
+  const { data: coupons } = useActiveCoupons();
+
+  // Build promoted set: bikes that have an active coupon assigned
+  const couponByBike = new Map<string, string>();
+  coupons?.forEach(c => { if (c.bike_id) couponByBike.set(c.bike_id, c.code); });
+  const promotedBikes = (allBikes ?? []).filter(b => couponByBike.has(b.id));
 
   // Show featured if available, otherwise show first 4 bikes
   const displayBikes = featured && featured.length > 0 ? featured : (allBikes?.slice(0, 4) ?? []);
@@ -69,6 +76,23 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Promoted Deals */}
+      {promotedBikes.length > 0 && (
+        <section className="border-b border-border bg-gradient-to-r from-accent/10 to-primary/10 py-12">
+          <div className="container">
+            <div className="mb-6 flex items-center gap-2">
+              <Tag className="h-5 w-5 text-accent" />
+              <h2 className="font-display text-2xl font-bold text-foreground">Hot Deals — Limited Time</h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {promotedBikes.slice(0, 4).map(bike => (
+                <BikeCard key={bike.id} bike={bike} promoted couponCode={couponByBike.get(bike.id)} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Featured Bikes */}
       <section className="py-16">
