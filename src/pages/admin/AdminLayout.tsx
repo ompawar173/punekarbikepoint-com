@@ -1,7 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Navigate, Link, Outlet, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, Bike, MessageSquare, Image, LogOut, Tag } from "lucide-react";
+import { LayoutDashboard, Bike, MessageSquare, Image, LogOut, Tag, FileText, Images } from "lucide-react";
 
 const AdminLayout = () => {
   const { user, isAdmin, isManager, loading, signOut } = useAuth();
@@ -15,6 +15,8 @@ const AdminLayout = () => {
     { to: "/admin/bikes", label: "Bikes", icon: Bike },
     { to: "/admin/inquiries", label: "Inquiries", icon: MessageSquare },
     { to: "/admin/coupons", label: "Coupons", icon: Tag },
+    { to: "/admin/invoices", label: "Billing / Invoices", icon: FileText },
+    { to: "/admin/slider", label: "Homepage Slider", icon: Images },
     { to: "/admin/gallery", label: "Gallery", icon: Image },
   ];
 
