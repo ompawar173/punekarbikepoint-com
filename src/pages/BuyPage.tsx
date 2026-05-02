@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useBikes, BRANDS } from "@/hooks/useBikes";
+import { useCouponByBike } from "@/hooks/useCoupons";
 import BikeCard from "@/components/BikeCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const BuyPage = () => {
   const { data: bikes, isLoading } = useBikes();
+  const couponByBike = useCouponByBike();
   const [search, setSearch] = useState("");
   const [brand, setBrand] = useState("all");
   const [priceRange, setPriceRange] = useState([0, 500000]);
@@ -135,7 +137,7 @@ const BuyPage = () => {
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                 {filtered.map((bike, i) => (
                   <div key={bike.id} className="animate-fade-in" style={{ animationDelay: `${i * 50}ms` }}>
-                    <BikeCard bike={bike} />
+                    <BikeCard bike={bike} coupon={couponByBike.get(bike.id)} />
                   </div>
                 ))}
               </div>

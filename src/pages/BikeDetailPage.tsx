@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useBike, useBikes } from "@/hooks/useBikes";
+import { useCouponByBike } from "@/hooks/useCoupons";
+import { computeDiscount } from "@/lib/coupons";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -18,6 +20,7 @@ const BikeDetailPage = () => {
   const { id } = useParams();
   const { data: bike, isLoading } = useBike(id);
   const { data: allBikes } = useBikes();
+  const couponByBike = useCouponByBike();
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -129,9 +132,34 @@ const BikeDetailPage = () => {
           {/* Details */}
           <div className="lg:col-span-2">
             <h1 className="mb-2 font-display text-3xl font-bold text-foreground">{bike.title}</h1>
-            <p className="mb-6 font-display text-4xl font-bold text-primary">
-              ₹{bike.price.toLocaleString("en-IN")}
-            </p>
+            {(() => {
+              const discount = computeDiscount(bike.price, couponByBike.get(bike.id));
+              if (discount) {
+                return (
+                  <div className="mb-6">
+                    <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">
+                      🏷️ {discount.label} • Coupon {discount.coupon.code}
+                    </div>
+                    <div className="flex items-baseline gap-3">
+                      <p className="font-display text-4xl font-bold text-primary">
+                        ₹{discount.finalPrice.toLocaleString("en-IN")}
+                      </p>
+                      <p className="text-lg text-muted-foreground line-through">
+                        ₹{bike.price.toLocaleString("en-IN")}
+                      </p>
+                    </div>
+                    <p className="mt-1 text-sm text-success font-semibold">
+                      You save ₹{discount.discountAmount.toLocaleString("en-IN")}
+                    </p>
+                  </div>
+                );
+              }
+              return (
+                <p className="mb-6 font-display text-4xl font-bold text-primary">
+                  ₹{bike.price.toLocaleString("en-IN")}
+                </p>
+              );
+            })()}
 
             <div className="mb-6 grid grid-cols-2 gap-3">
               {specs.map((spec) => (

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -18,4 +19,16 @@ export const useActiveCoupons = () => {
       return data as Coupon[];
     },
   });
+};
+
+/** Map of bike_id -> active coupon (non-expired, active, with bike assigned). */
+export const useCouponByBike = () => {
+  const { data: coupons } = useActiveCoupons();
+  return useMemo(() => {
+    const m = new Map<string, Coupon>();
+    coupons?.forEach((c) => {
+      if (c.bike_id) m.set(c.bike_id, c);
+    });
+    return m;
+  }, [coupons]);
 };

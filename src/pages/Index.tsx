@@ -4,21 +4,18 @@ import { Search, ShieldCheck, Handshake, Tag } from "lucide-react";
 import BikeCard from "@/components/BikeCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import { useFeaturedBikes, useBikes } from "@/hooks/useBikes";
-import { useActiveCoupons } from "@/hooks/useCoupons";
+import { useCouponByBike } from "@/hooks/useCoupons";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const { data: featured, isLoading: featLoading } = useFeaturedBikes();
   const { data: allBikes, isLoading: allLoading } = useBikes();
-  const { data: coupons } = useActiveCoupons();
+  const couponByBike = useCouponByBike();
 
-  // Build promoted set: bikes that have an active coupon assigned
-  const couponByBike = new Map<string, string>();
-  coupons?.forEach(c => { if (c.bike_id) couponByBike.set(c.bike_id, c.code); });
   const promotedBikes = (allBikes ?? []).filter(b => couponByBike.has(b.id));
 
-  // Show featured if available, otherwise show first 4 bikes
   const displayBikes = featured && featured.length > 0 ? featured : (allBikes?.slice(0, 4) ?? []);
   const isLoading = featLoading && allLoading;
 
@@ -28,7 +25,7 @@ const Index = () => {
 
       {/* Hero */}
       <section className="hero-bg relative overflow-hidden py-20 md:py-32">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1920&h=1080&fit=crop')] bg-cover bg-center opacity-15" />
+        <HeroSlider />
         <div className="container relative z-10">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold leading-tight text-secondary-foreground md:text-6xl">
@@ -87,7 +84,7 @@ const Index = () => {
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {promotedBikes.slice(0, 4).map(bike => (
-                <BikeCard key={bike.id} bike={bike} promoted couponCode={couponByBike.get(bike.id)} />
+                <BikeCard key={bike.id} bike={bike} promoted coupon={couponByBike.get(bike.id)} />
               ))}
             </div>
           </div>
@@ -116,7 +113,7 @@ const Index = () => {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {displayBikes.map((bike, i) => (
                 <div key={bike.id} className="animate-fade-in" style={{ animationDelay: `${i * 100}ms` }}>
-                  <BikeCard bike={bike} />
+                  <BikeCard bike={bike} coupon={couponByBike.get(bike.id)} />
                 </div>
               ))}
             </div>

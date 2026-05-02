@@ -168,6 +168,108 @@ export type Database = {
           },
         ]
       }
+      invoices: {
+        Row: {
+          address: string | null
+          advance: number | null
+          balance: number | null
+          bike_model: string
+          chassis_no: string | null
+          created_at: string
+          customer_name: string
+          delivery_date: string | null
+          engine_no: string | null
+          final_price: number | null
+          id: string
+          invoice_no: string
+          invoice_type: Database["public"]["Enums"]["invoice_type"]
+          km_driven: number | null
+          mobile: string
+          notes: string | null
+          owner_details: string | null
+          payment_mode: Database["public"]["Enums"]["payment_mode"] | null
+          rc_details: string | null
+          registration_no: string | null
+          sale_price: number
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          advance?: number | null
+          balance?: number | null
+          bike_model: string
+          chassis_no?: string | null
+          created_at?: string
+          customer_name: string
+          delivery_date?: string | null
+          engine_no?: string | null
+          final_price?: number | null
+          id?: string
+          invoice_no: string
+          invoice_type: Database["public"]["Enums"]["invoice_type"]
+          km_driven?: number | null
+          mobile: string
+          notes?: string | null
+          owner_details?: string | null
+          payment_mode?: Database["public"]["Enums"]["payment_mode"] | null
+          rc_details?: string | null
+          registration_no?: string | null
+          sale_price?: number
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          advance?: number | null
+          balance?: number | null
+          bike_model?: string
+          chassis_no?: string | null
+          created_at?: string
+          customer_name?: string
+          delivery_date?: string | null
+          engine_no?: string | null
+          final_price?: number | null
+          id?: string
+          invoice_no?: string
+          invoice_type?: Database["public"]["Enums"]["invoice_type"]
+          km_driven?: number | null
+          mobile?: string
+          notes?: string | null
+          owner_details?: string | null
+          payment_mode?: Database["public"]["Enums"]["payment_mode"] | null
+          rc_details?: string | null
+          registration_no?: string | null
+          sale_price?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      slider_images: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          image_url: string
+          is_active: boolean
+          sort_order: number
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url: string
+          is_active?: boolean
+          sort_order?: number
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          sort_order?: number
+        }
+        Relationships: []
+      }
       upcoming_bikes: {
         Row: {
           created_at: string
@@ -236,6 +338,8 @@ export type Database = {
       app_role: "admin" | "manager"
       discount_type: "percentage" | "fixed"
       inquiry_status: "Pending" | "Open" | "Converted"
+      invoice_type: "sales" | "purchase"
+      payment_mode: "Cash" | "UPI" | "Bank"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -366,6 +470,8 @@ export const Constants = {
       app_role: ["admin", "manager"],
       discount_type: ["percentage", "fixed"],
       inquiry_status: ["Pending", "Open", "Converted"],
+      invoice_type: ["sales", "purchase"],
+      payment_mode: ["Cash", "UPI", "Bank"],
     },
   },
 } as const
