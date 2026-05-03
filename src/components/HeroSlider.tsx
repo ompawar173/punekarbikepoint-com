@@ -34,6 +34,7 @@ const HeroSlider = ({
           aria-hidden={i !== index}
         />
       ))}
+      <div className="absolute inset-0 bg-black/50" aria-hidden />
       {images.length > 1 && (
         <>
           <button
