@@ -29,7 +29,7 @@ const HeroSlider = ({
       {images.map((src, i) => (
         <div
           key={src + i}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${i === index ? "opacity-25" : "opacity-0"}`}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${i === index ? "opacity-100" : "opacity-0"}`}
           style={{ backgroundImage: `url(${src})` }}
           aria-hidden={i !== index}
         />
