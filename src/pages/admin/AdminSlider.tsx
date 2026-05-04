@@ -14,15 +14,33 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const MAX_SLIDES = 5;
+const DEFAULT_DISPLAY_SECONDS = 2;
 
 const AdminSlider = () => {
   const qc = useQueryClient();
   const { data: slides, isLoading } = useSliderImages(false);
   const [uploading, setUploading] = useState(false);
   const [caption, setCaption] = useState("");
+  const [displaySeconds, setDisplaySeconds] = useState(DEFAULT_DISPLAY_SECONDS);
   const [toDelete, setToDelete] = useState<SliderImage | null>(null);
 
   const reload = () => qc.invalidateQueries({ queryKey: ["slider_images"] });
+
+  const updateDisplaySeconds = async (slide: SliderImage, nextValue: number) => {
+    const safeValue = Math.max(1, nextValue);
+    const { error } = await supabase
+      .from("slider_images")
+      .update({ display_seconds: safeValue })
+      .eq("id", slide.id);
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success("Slide timer updated");
+    reload();
+  };
 
   const onUpload = async (file: File) => {
     if ((slides?.length ?? 0) >= MAX_SLIDES) {
@@ -37,11 +55,16 @@ const AdminSlider = () => {
     const { data: { publicUrl } } = supabase.storage.from("slider-images").getPublicUrl(path);
     const nextOrder = (slides?.length ?? 0) + 1;
     const { error } = await supabase.from("slider_images").insert({
-      image_url: publicUrl, caption: caption || null, sort_order: nextOrder, is_active: true,
+      image_url: publicUrl,
+      caption: caption || null,
+      sort_order: nextOrder,
+      is_active: true,
+      display_seconds: Math.max(1, displaySeconds),
     });
     setUploading(false);
     if (error) { toast.error(error.message); return; }
     setCaption("");
+    setDisplaySeconds(DEFAULT_DISPLAY_SECONDS);
     toast.success("Slide added");
     reload();
   };
@@ -79,10 +102,19 @@ const AdminSlider = () => {
 
       <div className="rounded-lg border border-slate-200 bg-white p-4">
         <h2 className="mb-3 font-semibold">Add new slide</h2>
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-4">
           <div className="md:col-span-2">
             <Label>Caption (optional)</Label>
             <Input value={caption} onChange={e => setCaption(e.target.value)} placeholder="Festival sale!" />
+          </div>
+          <div>
+            <Label>Timer (seconds)</Label>
+            <Input
+              type="number"
+              min={1}
+              value={displaySeconds}
+              onChange={(e) => setDisplaySeconds(Math.max(1, Number(e.target.value) || DEFAULT_DISPLAY_SECONDS))}
+            />
           </div>
           <div>
             <Label>Image file</Label>
@@ -100,20 +132,30 @@ const AdminSlider = () => {
               <th className="p-3 text-left">Order</th>
               <th className="p-3 text-left">Preview</th>
               <th className="p-3 text-left">Caption</th>
+              <th className="p-3 text-left">Timer</th>
               <th className="p-3 text-left">Active</th>
               <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
             {isLoading ? (
-              <tr><td className="p-4 text-slate-500" colSpan={5}>Loading…</td></tr>
+              <tr><td className="p-4 text-slate-500" colSpan={6}>Loading…</td></tr>
             ) : (slides?.length ?? 0) === 0 ? (
-              <tr><td className="p-4 text-slate-500" colSpan={5}>No slides yet.</td></tr>
+              <tr><td className="p-4 text-slate-500" colSpan={6}>No slides yet.</td></tr>
             ) : slides!.map((s, i) => (
               <tr key={s.id} className="border-t border-slate-100">
                 <td className="p-3">{i + 1}</td>
                 <td className="p-3"><img src={s.image_url} alt="" className="h-16 w-28 rounded object-cover" /></td>
                 <td className="p-3">{s.caption || <span className="text-slate-400">—</span>}</td>
+                <td className="p-3">
+                  <Input
+                    type="number"
+                    min={1}
+                    defaultValue={s.display_seconds ?? DEFAULT_DISPLAY_SECONDS}
+                    className="w-24"
+                    onBlur={(e) => updateDisplaySeconds(s, Number(e.target.value) || DEFAULT_DISPLAY_SECONDS)}
+                  />
+                </td>
                 <td className="p-3"><Switch checked={s.is_active} onCheckedChange={() => toggleActive(s)} /></td>
                 <td className="p-3">
                   <div className="flex gap-1">
