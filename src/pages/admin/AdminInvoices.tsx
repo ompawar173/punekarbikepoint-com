@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useInvoices, type Invoice } from "@/hooks/useInvoices";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Plus, FileText, Trash2, Download, Eye } from "lucide-react";
+import { Plus, FileText, Trash2, Download, Eye, Loader2 } from "lucide-react";
 import { generateInvoicePDF } from "@/lib/invoicePdf";
 import InvoiceForm from "./InvoiceForm";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -23,14 +23,36 @@ const AdminInvoices = () => {
   const [creating, setCreating] = useState<"sales" | "purchase" | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [toDelete, setToDelete] = useState<Invoice | null>(null);
+  const [generatingPdfId, setGeneratingPdfId] = useState<string | null>(null);
 
   const list = (invoices ?? []).filter(i => i.invoice_type === tab);
 
   const reload = () => qc.invalidateQueries({ queryKey: ["invoices"] });
 
-  const handlePreview = (inv: Invoice) => {
-    const url = generateInvoicePDF(inv, { preview: true });
-    if (url) setPreviewUrl(url);
+  const handlePreview = async (inv: Invoice) => {
+    setGeneratingPdfId(inv.id);
+    try {
+      const url = await generateInvoicePDF(inv, { preview: true });
+      if (url) setPreviewUrl(url);
+    } catch (error) {
+      console.error("Failed to generate preview:", error);
+      toast.error("Failed to generate PDF preview");
+    } finally {
+      setGeneratingPdfId(null);
+    }
+  };
+
+  const handleDownload = async (inv: Invoice) => {
+    setGeneratingPdfId(inv.id);
+    try {
+      await generateInvoicePDF(inv);
+      toast.success("Invoice downloaded");
+    } catch (error) {
+      console.error("Failed to download invoice:", error);
+      toast.error("Failed to download invoice");
+    } finally {
+      setGeneratingPdfId(null);
+    }
   };
 
   const doDelete = async () => {
@@ -93,8 +115,32 @@ const AdminInvoices = () => {
                       <td className="p-3">₹{Number(inv.final_price || inv.sale_price).toLocaleString("en-IN")}</td>
                       <td className="p-3">
                         <div className="flex gap-1">
-                          <Button size="icon" variant="outline" onClick={() => handlePreview(inv)} title="Preview"><Eye className="h-4 w-4" /></Button>
-                          <Button size="icon" variant="outline" onClick={() => generateInvoicePDF(inv)} title="Download"><Download className="h-4 w-4" /></Button>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => handlePreview(inv)}
+                            title="Preview"
+                            disabled={generatingPdfId === inv.id}
+                          >
+                            {generatingPdfId === inv.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Eye className="h-4 w-4" />
+                            )}
+                          </Button>
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => handleDownload(inv)}
+                            title="Download"
+                            disabled={generatingPdfId === inv.id}
+                          >
+                            {generatingPdfId === inv.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Download className="h-4 w-4" />
+                            )}
+                          </Button>
                           <Button size="icon" variant="outline" onClick={() => setEditing(inv)} title="Edit"><FileText className="h-4 w-4" /></Button>
                           <Button size="icon" variant="outline" className="text-red-600" onClick={() => setToDelete(inv)} title="Delete"><Trash2 className="h-4 w-4" /></Button>
                         </div>
@@ -119,11 +165,15 @@ const AdminInvoices = () => {
           <InvoiceForm
             invoice={editing}
             type={editing?.invoice_type as ("sales" | "purchase") ?? creating ?? "sales"}
-            onSaved={(saved) => {
+            onSaved={async (saved) => {
               setCreating(null); setEditing(null); reload();
               // Auto-preview after save
-              const url = generateInvoicePDF(saved, { preview: true });
-              if (url) setPreviewUrl(url);
+              try {
+                const url = await generateInvoicePDF(saved, { preview: true });
+                if (url) setPreviewUrl(url);
+              } catch (error) {
+                console.error("Failed to auto-preview:", error);
+              }
             }}
           />
         </DialogContent>
