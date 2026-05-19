@@ -20,16 +20,15 @@ export const generateInvoicePDF = async (
       const container = document.createElement("div");
       container.style.position = "absolute";
       container.style.left = "-9999px";
-      container.style.width = "210mm"; // A4 width
-      container.style.minHeight = "297mm"; // A4 height
+      container.style.width = "210mm";
+      container.style.minHeight = "297mm";
       container.style.backgroundColor = "#ffffff";
       document.body.appendChild(container);
 
       // Render React component
       const root = createRoot(container);
-      root.render(
-        <InvoiceTemplate invoice={inv} type={inv.invoice_type as "sales" | "purchase"} />
-      );
+      const invoiceElement = <InvoiceTemplate invoice={inv} type={inv.invoice_type as "sales" | "purchase"} />;
+      root.render(invoiceElement);
 
       // Wait for render to complete, then generate PDF
       setTimeout(() => {
