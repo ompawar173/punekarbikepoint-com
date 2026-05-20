@@ -1,6 +1,8 @@
 import type { Invoice } from "@/hooks/useInvoices";
 import InvoiceTemplate from "@/components/InvoiceTemplate";
 import { createRoot } from "react-dom/client";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export const generateInvoicePDF = async (
   inv: Invoice,
@@ -10,9 +12,6 @@ export const generateInvoicePDF = async (
   if (typeof document === "undefined") {
     throw new Error("PDF generation requires a browser environment");
   }
-
-  // Dynamically import browser-only dependencies
-  const html2pdf = (await import("html2pdf.js")).default;
 
   return new Promise((resolve, reject) => {
     try {
@@ -31,63 +30,68 @@ export const generateInvoicePDF = async (
       root.render(invoiceElement);
 
       // Wait for render to complete, then generate PDF
-      setTimeout(() => {
+      setTimeout(async () => {
         try {
-          const opt = {
-            margin: 0,
-            filename: `${inv.invoice_no}.pdf`,
-            image: { type: "png", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          };
+          // Use html2canvas to convert HTML to canvas
+          const canvas = await (window as any).html2canvas(container, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: "#ffffff",
+          });
 
-          html2pdf()
-            .set(opt)
-            .from(container)
-            .toPdf()
-            .get("pdf")
-            .then((pdf: any) => {
-              try {
-                const pageCount = pdf.internal.pages.length - 1;
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF({
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait",
+          });
 
-                // Add page numbers
-                for (let i = 1; i <= pageCount; i++) {
-                  pdf.setPage(i);
-                  pdf.setFontSize(10);
-                  pdf.setTextColor(150);
-                  pdf.text(
-                    `Page ${i} of ${pageCount}`,
-                    pdf.internal.pageSize.getWidth() / 2,
-                    pdf.internal.pageSize.getHeight() - 10,
-                    { align: "center" }
-                  );
-                }
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = pdf.internal.pageSize.getHeight();
+          const imgWidth = pdfWidth;
+          const imgHeight = (canvas.height * pdfWidth) / canvas.width;
 
-                if (opts?.preview) {
-                  // Return blob URL for preview
-                  const blob = pdf.output("blob");
-                  const url = URL.createObjectURL(blob);
-                  root.unmount();
-                  document.body.removeChild(container);
-                  resolve(url);
-                } else {
-                  // Download directly
-                  pdf.save(`${inv.invoice_no}.pdf`);
-                  root.unmount();
-                  document.body.removeChild(container);
-                  resolve(null);
-                }
-              } catch (error) {
-                root.unmount();
-                document.body.removeChild(container);
-                reject(error);
-              }
-            })
-            .catch((error: any) => {
-              root.unmount();
-              document.body.removeChild(container);
-              reject(error);
-            });
+          let heightLeft = imgHeight;
+          let position = 0;
+
+          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+          heightLeft -= pdfHeight;
+
+          while (heightLeft > 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pdfHeight;
+          }
+
+          // Add page numbers
+          const pageCount = pdf.internal.pages.length - 1;
+          for (let i = 1; i <= pageCount; i++) {
+            pdf.setPage(i);
+            pdf.setFontSize(10);
+            pdf.setTextColor(150);
+            pdf.text(
+              `Page ${i} of ${pageCount}`,
+              pdfWidth / 2,
+              pdfHeight - 10,
+              { align: "center" }
+            );
+          }
+
+          if (opts?.preview) {
+            // Return blob URL for preview
+            const blob = pdf.output("blob");
+            const url = URL.createObjectURL(blob);
+            root.unmount();
+            document.body.removeChild(container);
+            resolve(url);
+          } else {
+            // Download directly
+            pdf.save(`${inv.invoice_no}.pdf`);
+            root.unmount();
+            document.body.removeChild(container);
+            resolve(null);
+          }
         } catch (error) {
           root.unmount();
           document.body.removeChild(container);
