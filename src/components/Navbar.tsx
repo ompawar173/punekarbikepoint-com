@@ -22,9 +22,9 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Punekar Bike Point" className="h-10 w-10 rounded-lg object-contain" />
+          <img src={logo} alt="Punekar Bike Point's" className="h-10 w-10 rounded-lg object-contain" />
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-lg font-bold text-foreground">Punekar Bike Point</span>
+            <span className="font-display text-lg font-bold text-foreground">Punekar Bike Point's</span>
             <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Sale & Purchase</span>
           </div>
         </Link>
