@@ -9,9 +9,9 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <Link to="/" className="mb-4 flex items-center gap-2">
-              <img src={logo} alt="Punekar Bike Point" className="h-10 w-10 rounded-lg object-contain" />
+              <img src={logo} alt="Punekar Bike Point's" className="h-10 w-10 rounded-lg object-contain" />
               <div className="flex flex-col leading-tight">
-                <span className="font-display text-lg font-bold">Punekar Bike Point</span>
+                <span className="font-display text-lg font-bold">Punekar Bike Point's</span>
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-secondary-foreground/50">Sale & Purchase</span>
               </div>
             </Link>
@@ -45,6 +45,9 @@ const Footer = () => {
               <a href="tel:+919372058229" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Phone className="h-4 w-4" /> +91 93720 58229
               </a>
+              <a href="mailto:punekarbikepoint01@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Mail className="h-4 w-4" /> punekarbikepoint01@gmail.com
+              </a>
               <a href="mailto:info@punekarbikes.com" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" /> info@punekarbikes.com
               </a>
@@ -56,7 +59,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-secondary-foreground/10 pt-6 text-center text-sm text-secondary-foreground/50">
-          © {new Date().getFullYear()} Punekar Bike Point. All rights reserved.
+          © {new Date().getFullYear()} Punekar Bike Point's. All rights reserved.
         </div>
       </div>
     </footer>
