@@ -373,7 +373,9 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
   // ═══════════════════════════════════════════════════════════
   const SalesNotePage3 = () => {
     let balance = Number(invoice.final_price ?? invoice.sale_price ?? 0);
-    const rows = (invoice.payments ?? []).map((p) => {
+    const paymentsList: Array<{ date: string; amount: number; transaction_id?: string; method?: string }> =
+      Array.isArray(invoice.payments) ? (invoice.payments as any[]) : [];
+    const rows = paymentsList.map((p) => {
       balance -= Number(p.amount);
       return {
         date: new Date(p.date).toLocaleDateString("en-IN"),
