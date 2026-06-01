@@ -48,11 +48,8 @@ const Footer = () => {
               <a href="mailto:punekarbikepoint01@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" /> punekarbikepoint01@gmail.com
               </a>
-              <a href="mailto:info@punekarbikes.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Mail className="h-4 w-4" /> info@punekarbikes.com
-              </a>
               <span className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Opposite Marathi School, Near Bhaji Mandai, Dhanvantari Colony, Wadgaon Sheri, Pune, Maharashtra 411014
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Shop No. 07, Sai Pruthvi Apt, Near Bhaji Mandai, Opp. Marathi School, Wadgaon Sheri, Pune 411014
               </span>
             </div>
           </div>

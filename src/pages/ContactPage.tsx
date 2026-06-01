@@ -64,8 +64,8 @@ const ContactPage = () => {
             <div className="lg:col-span-2 space-y-6">
               {[
                 { icon: Phone, label: "Phone", value: "+91 93720 58229", href: "tel:+919372058229" },
-                { icon: Mail, label: "Email", value: "info@punekarbikes.com", href: "mailto:info@punekarbikes.com" },
-                { icon: MapPin, label: "Address", value: "Opposite Marathi School, Near Bhaji Mandai, Dhanvantari Colony, Wadgaon Sheri, Pune, Maharashtra 411014" },
+                { icon: Mail, label: "Email", value: "punekarbikepoint01@gmail.com", href: "mailto:punekarbikepoint01@gmail.com" },
+                { icon: MapPin, label: "Address", value: "Shop No. 07, Sai Pruthvi Apt, Near Bhaji Mandai, Opp. Marathi School, Wadgaon Sheri, Pune 411014" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4 rounded-xl border border-border bg-card p-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">

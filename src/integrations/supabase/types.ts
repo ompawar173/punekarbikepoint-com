@@ -170,76 +170,163 @@ export type Database = {
       }
       invoices: {
         Row: {
+          aadhaar_no: string | null
           address: string | null
           advance: number | null
+          advance_given: number | null
+          alt_mobile: string | null
           balance: number | null
+          balance_remaining: number | null
           bike_model: string
+          cc: string | null
+          channel: string | null
           chassis_no: string | null
+          colour: string | null
           created_at: string
           customer_name: string
           delivery_date: string | null
+          disbursed_amount: number | null
+          downpayment: number | null
           engine_no: string | null
+          existing_insurance: boolean | null
+          existing_warranty: boolean | null
           final_price: number | null
+          finance_partner: string | null
+          generated_by: string | null
           id: string
+          inspection_type: string | null
           invoice_no: string
           invoice_type: Database["public"]["Enums"]["invoice_type"]
           km_driven: number | null
+          kms_driven: number | null
+          loan: boolean | null
+          loan_on_vehicle: boolean | null
+          location: string | null
           mobile: string
+          no_of_owners: string | null
           notes: string | null
+          original_rc: boolean | null
           owner_details: string | null
+          pan_no: string | null
           payment_mode: Database["public"]["Enums"]["payment_mode"] | null
+          payments: Json | null
           rc_details: string | null
+          registration_date: string | null
           registration_no: string | null
+          registration_year: string | null
           sale_price: number
+          seller_address: string | null
+          seller_name: string | null
+          seller_type: string | null
           updated_at: string
+          warranty_applicable: boolean | null
+          warranty_expiry: string | null
         }
         Insert: {
+          aadhaar_no?: string | null
           address?: string | null
           advance?: number | null
+          advance_given?: number | null
+          alt_mobile?: string | null
           balance?: number | null
+          balance_remaining?: number | null
           bike_model: string
+          cc?: string | null
+          channel?: string | null
           chassis_no?: string | null
+          colour?: string | null
           created_at?: string
           customer_name: string
           delivery_date?: string | null
+          disbursed_amount?: number | null
+          downpayment?: number | null
           engine_no?: string | null
+          existing_insurance?: boolean | null
+          existing_warranty?: boolean | null
           final_price?: number | null
+          finance_partner?: string | null
+          generated_by?: string | null
           id?: string
+          inspection_type?: string | null
           invoice_no: string
           invoice_type: Database["public"]["Enums"]["invoice_type"]
           km_driven?: number | null
+          kms_driven?: number | null
+          loan?: boolean | null
+          loan_on_vehicle?: boolean | null
+          location?: string | null
           mobile: string
+          no_of_owners?: string | null
           notes?: string | null
+          original_rc?: boolean | null
           owner_details?: string | null
+          pan_no?: string | null
           payment_mode?: Database["public"]["Enums"]["payment_mode"] | null
+          payments?: Json | null
           rc_details?: string | null
+          registration_date?: string | null
           registration_no?: string | null
+          registration_year?: string | null
           sale_price?: number
+          seller_address?: string | null
+          seller_name?: string | null
+          seller_type?: string | null
           updated_at?: string
+          warranty_applicable?: boolean | null
+          warranty_expiry?: string | null
         }
         Update: {
+          aadhaar_no?: string | null
           address?: string | null
           advance?: number | null
+          advance_given?: number | null
+          alt_mobile?: string | null
           balance?: number | null
+          balance_remaining?: number | null
           bike_model?: string
+          cc?: string | null
+          channel?: string | null
           chassis_no?: string | null
+          colour?: string | null
           created_at?: string
           customer_name?: string
           delivery_date?: string | null
+          disbursed_amount?: number | null
+          downpayment?: number | null
           engine_no?: string | null
+          existing_insurance?: boolean | null
+          existing_warranty?: boolean | null
           final_price?: number | null
+          finance_partner?: string | null
+          generated_by?: string | null
           id?: string
+          inspection_type?: string | null
           invoice_no?: string
           invoice_type?: Database["public"]["Enums"]["invoice_type"]
           km_driven?: number | null
+          kms_driven?: number | null
+          loan?: boolean | null
+          loan_on_vehicle?: boolean | null
+          location?: string | null
           mobile?: string
+          no_of_owners?: string | null
           notes?: string | null
+          original_rc?: boolean | null
           owner_details?: string | null
+          pan_no?: string | null
           payment_mode?: Database["public"]["Enums"]["payment_mode"] | null
+          payments?: Json | null
           rc_details?: string | null
+          registration_date?: string | null
           registration_no?: string | null
+          registration_year?: string | null
           sale_price?: number
+          seller_address?: string | null
+          seller_name?: string | null
+          seller_type?: string | null
           updated_at?: string
+          warranty_applicable?: boolean | null
+          warranty_expiry?: string | null
         }
         Relationships: []
       }

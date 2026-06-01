@@ -253,7 +253,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-700 h-20 mb-2"></div>
             <div className="text-xs text-gray-600 font-bold">
-              Signature of 2WheelR Representative
+              Signature of Punekar Bike Points Representative
             </div>
           </div>
           <div className="text-center">
@@ -425,7 +425,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
         <div className="text-center">
           <div className="w-40 border-b-2 border-gray-700 h-20 mb-2"></div>
           <div className="text-xs text-gray-600 font-bold">
-            Signature of 2WheelR Representative
+            Signature of Punekar Bike Points Representative
           </div>
         </div>
         <div className="text-center">

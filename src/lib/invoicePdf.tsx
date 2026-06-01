@@ -3,7 +3,11 @@ import { DeliveryNoteTemplate } from "@/components/DeliveryNoteTemplate";
 import { createRoot } from "react-dom/client";
 import jsPDF from "jspdf";
 
-declare const html2canvas: any;
+declare global {
+  interface Window {
+    html2canvas: any;
+  }
+}
 
 export const generateInvoicePDF = async (
   inv: Invoice,
