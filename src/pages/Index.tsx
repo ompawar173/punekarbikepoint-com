@@ -29,7 +29,7 @@ const Index = () => {
         <div className="container relative z-10">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold leading-tight text-secondary-foreground md:text-6xl">
-              <span className="text-gradient">Punekar Bike Point</span>
+              Welcome to <span className="text-gradient">Punekar Bike Points</span>
             </h1>
             <p className="mb-2 text-xl font-semibold text-accent md:text-2xl">Sale & Purchase</p>
             <p className="mb-8 text-lg text-secondary-foreground/70 md:text-xl">
