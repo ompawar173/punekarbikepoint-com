@@ -194,7 +194,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
         <div className="flex justify-between items-end mt-9 pt-4 border-t border-gray-300">
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
-            <div className="text-xs text-gray-600 font-semibold">Signature of 2WheelR Representative</div>
+            <div className="text-xs text-gray-600 font-semibold">Signature of Punekar Bike Points Representative</div>
           </div>
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
@@ -280,7 +280,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
         <div className="flex justify-between items-end mt-9 pt-4 border-t border-gray-300">
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
-            <div className="text-xs text-gray-600 font-semibold">Signature of 2WheelR Representative</div>
+            <div className="text-xs text-gray-600 font-semibold">Signature of Punekar Bike Points Representative</div>
           </div>
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
@@ -305,13 +305,13 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
         <div className="space-y-4">
           <div>
             <div className="font-bold text-sm mb-2">Terms for Warranty</div>
-            <p className="text-sm mb-2">2WheelR Warranty is applicable:</p>
+            <p className="text-sm mb-2">Punekar Bike Points Warranty is applicable:</p>
             <ul className="text-xs space-y-1 ml-4">
               <li>
                 <strong>ONLY IF</strong> mentioned under <strong>"Warranty Details Section"</strong> of the Sales Delivery Note.
               </li>
               <li>
-                <strong>ONLY</strong> for those customers who purchase a pre-owned 2-wheeler from 2WheelR (including all 2WheelR company owned stores and franchises).
+                <strong>ONLY</strong> for those customers who purchase a pre-owned 2-wheeler from Punekar Bike Points (including all Punekar Bike Points company owned stores and franchises).
               </li>
               <li>
                 <strong>ONLY</strong> covers bikes under 150cc that are 7 years or younger from date of sale as mentioned on the Sales Delivery Note.
@@ -336,7 +336,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
 
           <div>
             <div className="font-bold text-sm mb-2">
-              2WheelR Warranty <span className="text-red-600">DOES NOT COVER</span>:
+              Punekar Bike Points Warranty <span className="text-red-600">DOES NOT COVER</span>:
             </div>
             <ul className="text-xs space-y-1 ml-4">
               <li>Bikes/Motorcycles above 151cc</li>
@@ -357,7 +357,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
         <div className="flex justify-between items-end mt-9 pt-4 border-t border-gray-300">
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
-            <div className="text-xs text-gray-600 font-semibold">Signature of 2WheelR Representative</div>
+            <div className="text-xs text-gray-600 font-semibold">Signature of Punekar Bike Points Representative</div>
           </div>
           <div className="text-center">
             <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
@@ -436,7 +436,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
           <div className="flex justify-between items-end mt-9 pt-4 border-t border-gray-300">
             <div className="text-center">
               <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
-              <div className="text-xs text-gray-600 font-semibold">Signature of 2WheelR Representative</div>
+              <div className="text-xs text-gray-600 font-semibold">Signature of Punekar Bike Points Representative</div>
             </div>
             <div className="text-center">
               <div className="w-40 border-b-2 border-gray-800 mb-1 h-9"></div>
