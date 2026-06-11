@@ -36,14 +36,21 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
             </div>
           </div>
           <div className="text-right">
-            <div className="text-4xl font-black text-gray-800">
-              2<span className="text-teal-700">Wheel</span>R
+            <div className="text-2xl font-black text-teal-700 leading-tight">
+              Punekar Bikes Point
             </div>
-            <div className="text-xs text-gray-500">...sabke liye.</div>
+            <div className="text-[11px] text-gray-600 mt-1 leading-snug">
+              Shop No. 07, Sai Pruthvi Apt,<br />
+              Near Bhaji Mandai, Opp. Marathi School,<br />
+              Wadgaon Sheri, Pune 411014
+            </div>
+            <div className="text-[11px] text-gray-700 mt-0.5">
+              +91 93720 58229 · punekarbikepoint01@gmail.com
+            </div>
           </div>
         </div>
         <div className="bg-gray-800 text-white text-xs font-bold p-2 text-right">
-          GST: RIDEONRENT TECHNOLOGIES PRIVATE LIMITED: 27AAHCR4949R1ZD
+          PUNEKAR BIKES POINT · Wadgaon Sheri, Pune 411014 · +91 93720 58229
         </div>
 
         {/* Title */}
@@ -297,14 +304,21 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-4xl font-black text-gray-800">
-            2<span className="text-teal-700">Wheel</span>R
+          <div className="text-2xl font-black text-teal-700 leading-tight">
+            Punekar Bikes Point
           </div>
-          <div className="text-xs text-gray-500">...sabke liye.</div>
+          <div className="text-[11px] text-gray-600 mt-1 leading-snug">
+            Shop No. 07, Sai Pruthvi Apt,<br />
+            Near Bhaji Mandai, Opp. Marathi School,<br />
+            Wadgaon Sheri, Pune 411014
+          </div>
+          <div className="text-[11px] text-gray-700 mt-0.5">
+            +91 93720 58229 · punekarbikepoint01@gmail.com
+          </div>
         </div>
       </div>
       <div className="bg-gray-800 text-white text-xs font-bold p-2 text-right">
-        GST: RIDEONRENT TECHNOLOGIES PRIVATE LIMITED: 27AAHCR4949R1ZD
+        PUNEKAR BIKES POINT · Wadgaon Sheri, Pune 411014 · +91 93720 58229
       </div>
 
       {/* Title */}
