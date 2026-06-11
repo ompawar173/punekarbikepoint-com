@@ -29,7 +29,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
   );
 
   const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-    <div className="text-xs font-bold uppercase tracking-wider text-white bg-teal-600 px-2.5 py-1 rounded my-4 mb-2.5">
+    <div className="text-xs font-bold uppercase tracking-wider text-white bg-orange-600 px-2.5 py-1 rounded my-4 mb-2.5">
       {children}
     </div>
   );
@@ -42,7 +42,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
 
   const DocHeader = ({ meta, showBrand = true }: { meta: any; showBrand?: boolean }) => (
     <>
-      <div className="grid grid-cols-[1fr_auto] gap-4 items-start p-5 border-b-4 border-teal-700">
+      <div className="grid grid-cols-[1fr_auto] gap-4 items-start p-5 border-b-4 border-orange-600">
         <div className="text-xs text-gray-600 leading-relaxed">
           <div>
             <strong>
@@ -72,7 +72,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
         </div>
         {showBrand && (
           <div className="text-right">
-            <div className="text-2xl font-black text-teal-700 leading-tight">
+            <div className="text-2xl font-black text-orange-600 leading-tight">
               Punekar Bikes Point
             </div>
             <div className="text-[11px] text-gray-600 mt-1 leading-snug">
@@ -86,14 +86,14 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
           </div>
         )}
       </div>
-      <div className="bg-gray-800 text-white text-xs font-semibold tracking-wider text-right px-6 py-1">
+      <div className="bg-slate-900 text-white text-xs font-semibold tracking-wider text-right px-6 py-1">
         PUNEKAR BIKES POINT · Wadgaon Sheri, Pune 411014 · +91 93720 58229
       </div>
     </>
   );
 
   const DocTitle = ({ children }: { children: React.ReactNode }) => (
-    <div className="bg-gray-600 text-white text-center font-black text-lg uppercase tracking-wider py-2.5">
+    <div className="bg-slate-800 text-white text-center font-black text-lg uppercase tracking-wider py-2.5">
       {children}
     </div>
   );
@@ -160,7 +160,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
           <SectionHeading>Documents for Transfer</SectionHeading>
           <div className="grid grid-cols-2 gap-8">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-white bg-teal-500 px-2.5 py-1 rounded mb-2.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-white bg-orange-500 px-2.5 py-1 rounded mb-2.5">
                 Vehicle Documents
               </div>
               <FieldRow label="Original RC" value={<Badge value={true} />} />
@@ -169,7 +169,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
               <FieldRow label="Other Documents" value="–" />
             </div>
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-white bg-teal-500 px-2.5 py-1 rounded mb-2.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-white bg-orange-500 px-2.5 py-1 rounded mb-2.5">
                 Original Owner Documents
               </div>
               <FieldRow label="Aadhaar Card" value={<Badge value={true} />} />
@@ -355,7 +355,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
 
           <p className="text-xs font-bold mt-3">Registration Certificate (RC) / Delivery Note receipt should be available at the time of claim.</p>
 
-          <div className="text-xs p-3 bg-teal-50 border-l-4 border-teal-700 rounded mt-3">
+          <div className="text-xs p-3 bg-orange-50 border-l-4 border-orange-600 rounded mt-3">
             To claim warranty benefits please, call us on <strong>+91 93720 58229</strong> OR email us at <strong>punekarbikepoint01@gmail.com</strong>
           </div>
         </div>
@@ -413,7 +413,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
           {/* Transaction table */}
           <table className="w-full text-xs border-collapse mt-2.5">
             <thead>
-              <tr className="bg-gray-600 text-white">
+              <tr className="bg-slate-800 text-white">
                 <th className="p-2 text-left font-bold uppercase">Transaction Date</th>
                 <th className="p-2 text-left font-bold uppercase">Amount Paid</th>
                 <th className="p-2 text-left font-bold uppercase">Transaction ID</th>
@@ -431,7 +431,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
                   <td className="p-2 border-b border-gray-300 font-mono">{row.balance}</td>
                 </tr>
               ))}
-              <tr className="bg-teal-50">
+              <tr className="bg-orange-50">
                 <td colSpan={3}></td>
                 <td className="p-2 font-bold">BALANCE PENDING</td>
                 <td className="p-2 font-bold font-mono">₹{Math.max(0, balance).toLocaleString("en-IN")}</td>
@@ -458,17 +458,17 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
   return (
     <div className="min-h-screen bg-gray-200 p-4">
       {/* App Bar */}
-      <div className="sticky top-0 z-100 bg-gray-900 text-white flex items-center justify-between px-7 h-13 shadow-lg mb-4">
+      <div className="sticky top-0 z-100 bg-slate-900 text-white flex items-center justify-between px-7 h-13 shadow-lg mb-4">
         <div className="font-black text-xl tracking-wide">
-          <span className="text-teal-500">Punekar Bikes Point</span> <span className="text-xs font-normal text-gray-400 ml-2.5">Delivery Notes</span>
+          <span className="text-orange-500">Punekar Bikes Point</span> <span className="text-xs font-normal text-gray-400 ml-2.5">Delivery Notes</span>
         </div>
         <div className="flex gap-1.5">
           <button
             onClick={() => setActiveTab("purchase")}
             className={`px-4.5 py-1.5 rounded-full border-2 font-black text-xs tracking-wider uppercase transition-all cursor-pointer ${
               activeTab === "purchase"
-                ? "bg-teal-700 text-white border-teal-700"
-                : "bg-transparent text-gray-400 border-transparent hover:text-teal-700 hover:border-teal-700"
+                ? "bg-orange-600 text-white border-orange-600"
+                : "bg-transparent text-gray-400 border-transparent hover:text-orange-600 hover:border-orange-600"
             }`}
           >
             Purchase Delivery Note
@@ -477,8 +477,8 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
             onClick={() => setActiveTab("sales")}
             className={`px-4.5 py-1.5 rounded-full border-2 font-black text-xs tracking-wider uppercase transition-all cursor-pointer ${
               activeTab === "sales"
-                ? "bg-teal-700 text-white border-teal-700"
-                : "bg-transparent text-gray-400 border-transparent hover:text-teal-700 hover:border-teal-700"
+                ? "bg-orange-600 text-white border-orange-600"
+                : "bg-transparent text-gray-400 border-transparent hover:text-orange-600 hover:border-orange-600"
             }`}
           >
             Sales Delivery Note

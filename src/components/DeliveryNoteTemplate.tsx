@@ -9,7 +9,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
     return (
       <div className="bg-white p-8 space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-start pb-4 border-b-4 border-teal-700">
+        <div className="flex justify-between items-start pb-4 border-b-4 border-orange-600">
           <div className="text-sm text-gray-600 space-y-1">
             <div>
               <strong>PDN NO:</strong>{" "}
@@ -36,7 +36,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
             </div>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-black text-teal-700 leading-tight">
+            <div className="text-2xl font-black text-orange-600 leading-tight">
               Punekar Bikes Point
             </div>
             <div className="text-[11px] text-gray-600 mt-1 leading-snug">
@@ -49,19 +49,19 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-800 text-white text-xs font-bold p-2 text-right">
+        <div className="bg-slate-900 text-white text-xs font-bold p-2 text-right">
           PUNEKAR BIKES POINT · Wadgaon Sheri, Pune 411014 · +91 93720 58229
         </div>
 
         {/* Title */}
-        <div className="bg-gray-600 text-white text-center font-black text-lg uppercase tracking-wider py-3">
+        <div className="bg-slate-800 text-white text-center font-black text-lg uppercase tracking-wider py-3">
           Purchase Delivery Note
         </div>
 
         {/* Vehicle + RC */}
         <div className="grid grid-cols-2 gap-8">
           <div>
-            <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+            <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
               Vehicle Details
             </h3>
             <div className="space-y-2 text-sm">
@@ -105,7 +105,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
           </div>
 
           <div>
-            <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+            <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
               RC Details
             </h3>
             <div className="space-y-2 text-sm">
@@ -142,7 +142,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
         {/* Owner + Seller */}
         <div className="grid grid-cols-2 gap-8">
           <div>
-            <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+            <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
               Original Owner Details
             </h3>
             <div className="space-y-2 text-sm">
@@ -176,7 +176,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
           </div>
 
           <div>
-            <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+            <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
               Seller Details
             </h3>
             <div className="space-y-2 text-sm">
@@ -212,7 +212,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
 
         {/* Transaction */}
         <div>
-          <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+          <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
             Transaction Details
           </h3>
           <div className="grid grid-cols-2 gap-8">
@@ -278,7 +278,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
   return (
     <div className="bg-white p-8 space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-start pb-4 border-b-4 border-teal-700">
+      <div className="flex justify-between items-start pb-4 border-b-4 border-orange-600">
         <div className="text-sm text-gray-600 space-y-1">
           <div>
             <strong>SDN NO:</strong>{" "}
@@ -304,7 +304,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-black text-teal-700 leading-tight">
+          <div className="text-2xl font-black text-orange-600 leading-tight">
             Punekar Bikes Point
           </div>
           <div className="text-[11px] text-gray-600 mt-1 leading-snug">
@@ -317,12 +317,12 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-800 text-white text-xs font-bold p-2 text-right">
+      <div className="bg-slate-900 text-white text-xs font-bold p-2 text-right">
         PUNEKAR BIKES POINT · Wadgaon Sheri, Pune 411014 · +91 93720 58229
       </div>
 
       {/* Title */}
-      <div className="bg-gray-600 text-white text-center font-black text-lg uppercase tracking-wider py-3">
+      <div className="bg-slate-800 text-white text-center font-black text-lg uppercase tracking-wider py-3">
         Sales Delivery Note
       </div>
 
@@ -378,7 +378,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
 
       {/* Buyer Details */}
       <div>
-        <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+        <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
           Buyer Details
         </h3>
         <div className="space-y-2 text-sm">
@@ -411,7 +411,7 @@ export const DeliveryNoteTemplate = ({ invoice }: { invoice: Invoice }) => {
 
       {/* Transaction */}
       <div>
-        <h3 className="bg-teal-700 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
+        <h3 className="bg-orange-600 text-white text-xs font-bold p-2 mb-3 rounded uppercase tracking-wider">
           Transaction Details
         </h3>
         <div className="space-y-2 text-sm">
