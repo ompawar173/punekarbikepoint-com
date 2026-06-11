@@ -30,7 +30,6 @@ export type Database = {
           model: string
           owner: string
           price: number
-          rc_book_url: string | null
           seller_note: string | null
           title: string
           updated_at: string
@@ -51,7 +50,6 @@ export type Database = {
           model: string
           owner?: string
           price: number
-          rc_book_url?: string | null
           seller_note?: string | null
           title: string
           updated_at?: string
@@ -72,7 +70,6 @@ export type Database = {
           model?: string
           owner?: string
           price?: number
-          rc_book_url?: string | null
           seller_note?: string | null
           title?: string
           updated_at?: string
