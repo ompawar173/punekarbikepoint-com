@@ -72,15 +72,22 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
         </div>
         {showBrand && (
           <div className="text-right">
-            <div className="text-3xl font-black text-gray-800 leading-tight">
-              2<span className="text-teal-700">Wheel</span>R
+            <div className="text-2xl font-black text-teal-700 leading-tight">
+              Punekar Bikes Point
             </div>
-            <div className="text-xs text-gray-500 mt-0.5">...sabke liye.</div>
+            <div className="text-[11px] text-gray-600 mt-1 leading-snug">
+              Shop No. 07, Sai Pruthvi Apt,<br />
+              Near Bhaji Mandai, Opp. Marathi School,<br />
+              Wadgaon Sheri, Pune 411014
+            </div>
+            <div className="text-[11px] text-gray-700 mt-0.5">
+              +91 93720 58229 · punekarbikepoint01@gmail.com
+            </div>
           </div>
         )}
       </div>
       <div className="bg-gray-800 text-white text-xs font-semibold tracking-wider text-right px-6 py-1">
-        GST: RIDEONRENT TECHNOLOGIES PRIVATE LIMITED: 27AAHCR4949R1ZD
+        PUNEKAR BIKES POINT · Wadgaon Sheri, Pune 411014 · +91 93720 58229
       </div>
     </>
   );
@@ -349,7 +356,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
           <p className="text-xs font-bold mt-3">Registration Certificate (RC) / Delivery Note receipt should be available at the time of claim.</p>
 
           <div className="text-xs p-3 bg-teal-50 border-l-4 border-teal-700 rounded mt-3">
-            To claim warranty benefits please, call us on <strong>+91 8483893934</strong> OR email us at <strong>support@2wheelr.com</strong>
+            To claim warranty benefits please, call us on <strong>+91 93720 58229</strong> OR email us at <strong>punekarbikepoint01@gmail.com</strong>
           </div>
         </div>
 
@@ -453,7 +460,7 @@ export const InvoiceTemplate = ({ invoice, type = invoice.invoice_type }: Invoic
       {/* App Bar */}
       <div className="sticky top-0 z-100 bg-gray-900 text-white flex items-center justify-between px-7 h-13 shadow-lg mb-4">
         <div className="font-black text-xl tracking-wide">
-          2<span className="text-teal-600">Wheel</span>R <span className="text-xs font-normal text-gray-400 ml-2.5">Delivery Notes</span>
+          <span className="text-teal-500">Punekar Bikes Point</span> <span className="text-xs font-normal text-gray-400 ml-2.5">Delivery Notes</span>
         </div>
         <div className="flex gap-1.5">
           <button
